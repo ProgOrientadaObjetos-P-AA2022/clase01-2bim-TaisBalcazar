@@ -26,6 +26,10 @@ public class Empresa {
         edificios = m;
     }
 
+    public void establecerVehiculos(Vehiculo[] m) {
+        vehiculos = m;
+    }
+
     public void establecerCostoBienesInmuebles() {
         double suma = 0;
         for (int i = 0; i < edificios.length; i++) {
@@ -40,7 +44,6 @@ public class Empresa {
         double suma = 0;
         for (int i = 0; i < vehiculos.length; i++) {
             suma = suma + vehiculos[i].obtenerValor();
-            //suma+= edificios[i].obtenerCosto();
         }
 
         costoVehiculos = suma;
@@ -56,6 +59,10 @@ public class Empresa {
 
     public Edificio[] obtenerEdificios() {
         return edificios;
+    }
+
+    public Vehiculo[] obtenerVehiculos() {
+        return vehiculos;
     }
 
     public double obtenerCostoBienesInmuebles() {
@@ -82,23 +89,25 @@ public class Empresa {
                     edificios[i].obtenerCosto());
         }
 
-        reporte = String.format("%sTotal de inmuebles: %.1f\nLista de Vehiculos",
+        reporte = String.format("%sTotal de inmuebles: %.1f\n\n"
+                + "Lista de Vehiculos\n",
                 reporte,
                 obtenerCostoBienesInmuebles());
 
         for (int i = 0; i < vehiculos.length; i++) {
-            reporte = String.format("%s%d. %s (%.1f)\n", reporte,
+            reporte = String.format("%s%d. %s, %s (%.1f)\n", reporte,
                     i + 1,
+                    vehiculos[i].obtenerTipo(),
                     vehiculos[i].obtenerMatricula().toUpperCase(),
                     vehiculos[i].obtenerValor());
         }
-        
-        reporte = String.format("%sTotal de inmuebles: %.1f\n"
-                + "Total de bienes: %.1f\n", 
-                reporte, 
+
+        reporte = String.format("%sTotal de inmuebles: %.1f\n\n"
+                + "Total de bienes: %.1f\n",
+                reporte,
                 obtenerCostoVehiculos(),
                 obtenerCostoTotalBienes());
-        
+
         return reporte;
     }
 
